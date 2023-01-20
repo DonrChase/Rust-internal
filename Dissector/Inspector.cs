@@ -5,31 +5,31 @@ using System.IO;
 
 namespace Dissector
 {
-    public class Inspector
+public class Inspector
     {
-        private  ulong _cr3;
-        private  IntPtr _memHelper;
+private  ulong _cr3;
+private  IntPtr _memHelper;
 
         /// <summary>
         /// m_vDumpedRegion
         /// 
         ///     The memory dumped from the external process.
         /// </summary>
-        private byte[] _dumpedMemoryRegion;
+private byte[] _dumpedMemoryRegion;
 
         /// <summary>
         /// m_vAddress
         /// 
         ///     The starting address we want to begin reading at.
         /// </summary>
-        private IntPtr _regionStartAddress;
+private IntPtr _regionStartAddress;
 
         /// <summary>
         /// m_vSize
         /// 
         ///     The number of bytes we wish to read from the process.
         /// </summary>
-        private int _regionSize;
+private int _regionSize;
 
 
         #region "sigScan Class Construction"
@@ -40,7 +40,7 @@ namespace Dissector
         ///     Simply initializes the class properties and 
         ///     expects the user to set them later.
         /// </summary>
-        public Inspector()
+public Inspector()
         {
             this._regionStartAddress = IntPtr.Zero;
             this._regionSize = 0;
@@ -56,7 +56,7 @@ namespace Dissector
         /// <param name="proc">The process to dump the memory from.</param>
         /// <param name="addr">The started address to begin the dump.</param>
         /// <param name="size">The size of the dump.</param>
-        public Inspector(IntPtr addr, int size, IntPtr memHelper, ulong cr3)
+public Inspector(IntPtr addr, int size, IntPtr memHelper, ulong cr3)
         {
             this._regionStartAddress = addr;
             this._regionSize = size;
@@ -74,7 +74,8 @@ namespace Dissector
         ///     properties to dump a memory region.
         /// </summary>
         /// <returns>Boolean based on RPM results and valid properties.</returns>
-        private bool DumpMemory()
+            
+private bool DumpMemory()
         {
             try
             {
@@ -111,7 +112,7 @@ namespace Dissector
         /// Write to a text file the 8 bytes at each address in the dumped region
         /// Write to a text file the 8 bytes re-read at each address with only an 8 byte buffer (I suspect this is the correct way to pattern scan with phys mem)
         /// </summary>
-        private void Dump()
+private void Dump()
         {
             StreamWriter stw = new StreamWriter("dump" + _regionStartAddress.ToString("X") + ".txt");
 
@@ -153,7 +154,7 @@ namespace Dissector
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
-        private string ConvertBytesToStringHex(int i, byte[] buffer)
+private string ConvertBytesToStringHex(int i, byte[] buffer)
         {
             /* Gets 8 bytes worth of data */
             var onebyte = buffer[i];
@@ -189,7 +190,7 @@ namespace Dissector
         /// <param name="btPattern">Pattern to scan for.</param>
         /// <param name="strMask">Mask to compare against.</param>
         /// <returns>Boolean depending on if the pattern was found.</returns>
-        private bool MaskCheck(int nOffset, byte[] btPattern, string strMask, out List<byte> maskBytes)
+private bool MaskCheck(int nOffset, byte[] btPattern, string strMask, out List<byte> maskBytes)
         {
             try
             {
